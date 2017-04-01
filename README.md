@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Track form!
+Best Photo
 
 ## Team Members
 
