@@ -244,5 +244,23 @@ namespace Microsoft.Samples.Kinect.ColorBasics
             this.StatusText = this.kinectSensor.IsAvailable ? Properties.Resources.RunningStatusText
                                                             : Properties.Resources.SensorNotAvailableStatusText;
         }
+
+        private void DrawHand(HandState handState, Point handPosition, DrawingContext drawingContext)
+        {
+            switch (handState)
+            {
+                double pixelWidth = test.Source.Width;
+                double pixelHeight = test.Source.Height;
+                case HandState.Closed:
+                    if(handPosition.X == 1)
+                    {
+
+                    }
+                    break;
+                case HandState.Open:
+
+                    break;
+            }
+        }
     }
 }
