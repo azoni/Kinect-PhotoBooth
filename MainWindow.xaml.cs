@@ -23,13 +23,21 @@ namespace Microsoft.Samples.Kinect.ColorBasics
     using Imgur.API.Models.Impl;
     using System.Collections.Generic;
     using FaceBooth;
+    using Microsoft.ProjectOxford.Face;
+    using Microsoft.ProjectOxford.Face.Contract;
+    using System.Linq;
+    using System.Net.Http;
+    using System.Text;
+    using System.Net.Http.Headers;
+    using System.Web;
+    using System.Web.Util;
 
     /// <summary>
     /// Interaction logic for MainWindow
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-
+        private readonly IFaceServiceClient faceServiceClient = new FaceServiceClient("ed3ff1e1af6d46a79a8718c57af132c8");
         /// <summary>
         /// Coordinate mapper to map one type of point to another
         /// </summary>
@@ -463,10 +471,10 @@ namespace Microsoft.Samples.Kinect.ColorBasics
                 string myPhotos = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
 
                 string path = Path.Combine(myPhotos, "KinectScreenshot-Color-" + ".png");
-
+                //FaceAttributes[] faces = await FaceAPI.UploadAndDetectFaces(path);
                 // write the new file to disk
                 try
-                {
+                { 
                     // FileStream is IDisposable
                     using (FileStream fs = new FileStream(path, FileMode.Create))
                     {
@@ -494,15 +502,70 @@ namespace Microsoft.Samples.Kinect.ColorBasics
                 {
                     this.StatusText = string.Format(Properties.Resources.FailedScreenshotStatusTextFormat, path);
                 }
+
+               
             }
         }
 
-        /// <summary>
-        /// Handles the color frame data arriving from the sensor
-        /// </summary>
-        /// <param name="sender">object sending the event</param>
-        /// <param name="e">event arguments</param>
-        private void Reader_ColorFrameArrived(object sender, ColorFrameArrivedEventArgs e)
+        private async void ScreenShot()
+        {
+            if (this.colorBitmap != null)
+            {
+                // create a png bitmap encoder which knows how to save a .png file
+                BitmapEncoder encoder = new PngBitmapEncoder();
+
+                // create frame from the writable bitmap and add to encoder
+                encoder.Frames.Add(BitmapFrame.Create(this.colorBitmap));
+
+                string time = System.DateTime.Now.Second.ToString();
+
+                string myPhotos = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+
+                string path = Path.Combine(myPhotos, "KinectScreenshot-Color-" + ".png");
+                //FaceAttributes[] faces = await FaceAPI.UploadAndDetectFaces(path);
+                // write the new file to disk
+                try
+                {
+                    // FileStream is IDisposable
+                    using (FileStream fs = new FileStream(path, FileMode.Create))
+                    {
+                        encoder.Save(fs);
+
+                    }
+                    var token = new OAuth2Token("6594f416cc22a80182b81945bea8406129e96e7c", "f3688b4a0deaba6cbc752eaee7de95688d66bb72", "bearer",
+                    "58085561", "azoni", 2419200);
+                    var client = new ImgurClient("c053a3317b42e48", "00a0ca5cf5fed734bc2d35858f2ff6f0527a9caf", token);
+                    client.SetOAuth2Token(token);
+                    var endpoint = new ImageEndpoint(client);
+
+                    IImage image2;
+
+                    TwitterAPI.TweetPicture(path);
+                    using (var fs2 = new FileStream(path, FileMode.Open))
+                    {
+                        image2 = await endpoint.UploadImageStreamAsync(fs2, "ZJAi9", "Kinect-Photo", "Hi");
+
+                        Console.WriteLine(image2.Link);
+                    }
+                    this.StatusText = string.Format(Properties.Resources.SavedScreenshotStatusTextFormat, path);
+                }
+                catch (IOException)
+                {
+                    this.StatusText = string.Format(Properties.Resources.FailedScreenshotStatusTextFormat, path);
+                }
+
+
+            }
+        }
+
+  
+    
+    /// <summary>
+    /// Handles the color frame data arriving from the sensor
+    /// </summary>
+    /// <param name="sender">object sending the event</param>
+    /// <param name="e">event arguments</param>
+    private void Reader_ColorFrameArrived(object sender, ColorFrameArrivedEventArgs e)
         {
             // ColorFrame is IDisposable
             using (ColorFrame colorFrame = e.FrameReference.AcquireFrame())
@@ -632,20 +695,66 @@ namespace Microsoft.Samples.Kinect.ColorBasics
             // extract each face property information and store it in faceText
             if (faceResult.FaceProperties != null)
             {
+                bool happy = false;
+                bool rightEye = false;
+                bool leftEye = false;
+                bool engaged = false;
                 foreach (var item in faceResult.FaceProperties)
                 {
+                    
                     faceText += item.Key.ToString() + " : ";
-                    Trace.WriteLine(item.ToString());
-                    Console.WriteLine(item.ToString());
+                    //Trace.WriteLine(item.ToString());
                     // consider a "maybe" as a "no" to restrict 
                     // the detection result refresh rate
-                    if (item.Value == DetectionResult.Maybe)
+                    if (item.Key.ToString() == "Happy" && item.Value.ToString() == "Yes") 
                     {
-                        faceText += DetectionResult.No + "\n";
+                        
+                        happy = true;
                     }
-                    else
+                    else if(item.Key.ToString() == "Happy" && item.Value.ToString() != "Yes")
                     {
-                        faceText += item.Value.ToString() + "\n";
+                        
+                        happy = false;
+                    }
+                    if (item.Key.ToString() == "Engaged" && item.Value.ToString() == "Yes") 
+                    {
+                        
+                        engaged = true;
+                    }
+                    else if (item.Key.ToString() == "Engaged" && item.Value.ToString() != "Yes")
+                    {
+                        
+                        engaged = false;
+                    }
+                    if (item.Key.ToString() == "LeftEyeClosed" && item.Value.ToString() == "No") 
+                    {
+                        
+                        leftEye = true;
+                    }
+                    else if (item.Key.ToString() == "LeftEyeClosed" && item.Value.ToString() != "No")
+                    {
+                        
+                        leftEye = false;
+                    }
+                    if (item.Key.ToString() == "RightEyeClosed" && item.Value.ToString() == "No") 
+                    {
+                        
+                        rightEye = true;
+                    }
+                    else if (item.Key.ToString() == "RightEyeClosed" && item.Value.ToString() != "No")
+                    {
+                        
+                        rightEye = false;
+                    }
+                    
+                    if (happy && engaged && leftEye && rightEye)
+                    {
+                        Debug.WriteLine("did it");
+                        this.ScreenShot();
+                        happy = false;
+                        rightEye = false;
+                        leftEye = false;
+                        engaged = false;
                     }
                 }
             }
