@@ -746,5 +746,6 @@ namespace Microsoft.Samples.Kinect.ColorBasics
             this.StatusText = this.kinectSensor.IsAvailable ? Properties.Resources.RunningStatusText
                                                             : Properties.Resources.SensorNotAvailableStatusText;
         }
+
     }
 }
