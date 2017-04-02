@@ -53,7 +53,6 @@
             <Image Source="{Binding FaceSource}" Stretch="UniformToFill" />
         </Viewbox>
 
-        <Image Name="test" Grid.Row="0" Source="C:/Users/charl/OneDrive/Pictures/KinectScreenshot-Color-.png" Stretch="None" HorizontalAlignment="Center" Margin="0 0 0 5" Width="100" Height="100" />
 
         <Viewbox Grid.Row="1" HorizontalAlignment="Center">
             <Image Source="{Binding ImageSource}" Stretch="UniformToFill" />

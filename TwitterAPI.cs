@@ -15,7 +15,7 @@ namespace FaceBooth
     class TwitterAPI
     {
 
-        static void TweetPicture(string path)
+        public static void TweetPicture(string path)
         {
             var credentials = new TwitterCredentials("ZPelDIgzmbLcpxB4qqOwrG52U",
                                                      "0mRtHj3gF1sakk3V22gafM4EVttn3v5QrGbwkkdyjyA0hYxAOe",
@@ -26,7 +26,7 @@ namespace FaceBooth
             byte[] file1 = File.ReadAllBytes(path);
             var media = Upload.UploadImage(file1);
 
-            var tweet = Tweet.PublishTweet("LA HACKS 2017!", new PublishTweetOptionalParameters
+            var tweet = Tweet.PublishTweet("LA HACKS 2017, #lahacks2017", new PublishTweetOptionalParameters
             {
                 Medias = new List<IMedia> { media }
             });

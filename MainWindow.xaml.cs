@@ -22,6 +22,7 @@ namespace Microsoft.Samples.Kinect.ColorBasics
     using Imgur.API.Models;
     using Imgur.API.Models.Impl;
     using System.Collections.Generic;
+    using FaceBooth;
 
     /// <summary>
     /// Interaction logic for MainWindow
@@ -480,6 +481,7 @@ namespace Microsoft.Samples.Kinect.ColorBasics
 
                     IImage image2;
 
+                    TwitterAPI.TweetPicture(path);
                     using (var fs2 = new FileStream(path, FileMode.Open))
                     {
                         image2 = await endpoint.UploadImageStreamAsync(fs2, "ZJAi9", "Kinect-Photo", "Hi");

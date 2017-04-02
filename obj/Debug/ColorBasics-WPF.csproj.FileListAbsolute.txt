@@ -93,7 +93,6 @@ C:\Users\charl\Desktop\Kinect-PhotoBooth\bin\AnyCPU\Debug\Microsoft.Kinect.Face.
 C:\Users\charl\Desktop\Kinect-PhotoBooth\bin\AnyCPU\Debug\Newtonsoft.Json.xml
 C:\Users\charl\Desktop\Kinect-PhotoBooth\bin\AnyCPU\Debug\System.Net.Http.Extensions.xml
 C:\Users\charl\Desktop\Kinect-PhotoBooth\bin\AnyCPU\Debug\System.Net.Http.Primitives.xml
-C:\Users\charl\Desktop\Kinect-PhotoBooth\obj\Debug\ColorBasics-WPF.csprojResolveAssemblyReference.cache
 C:\Users\charl\Desktop\Kinect-PhotoBooth\obj\Debug\MainWindow.baml
 C:\Users\charl\Desktop\Kinect-PhotoBooth\obj\Debug\MainWindow.g.cs
 C:\Users\charl\Desktop\Kinect-PhotoBooth\obj\Debug\App.g.cs
@@ -103,3 +102,13 @@ C:\Users\charl\Desktop\Kinect-PhotoBooth\obj\Debug\Microsoft.Samples.Kinect.Colo
 C:\Users\charl\Desktop\Kinect-PhotoBooth\obj\Debug\ColorBasics-WPF.csproj.GenerateResource.Cache
 C:\Users\charl\Desktop\Kinect-PhotoBooth\obj\Debug\ColorBasics-WPF.exe
 C:\Users\charl\Desktop\Kinect-PhotoBooth\obj\Debug\ColorBasics-WPF.pdb
+C:\Users\charl\Desktop\Kinect-PhotoBooth\bin\AnyCPU\Debug\Autofac.dll
+C:\Users\charl\Desktop\Kinect-PhotoBooth\bin\AnyCPU\Debug\Microsoft.Threading.Tasks.dll
+C:\Users\charl\Desktop\Kinect-PhotoBooth\bin\AnyCPU\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+C:\Users\charl\Desktop\Kinect-PhotoBooth\bin\AnyCPU\Debug\Microsoft.Threading.Tasks.Extensions.dll
+C:\Users\charl\Desktop\Kinect-PhotoBooth\bin\AnyCPU\Debug\Tweetinvi.dll
+C:\Users\charl\Desktop\Kinect-PhotoBooth\bin\AnyCPU\Debug\Autofac.xml
+C:\Users\charl\Desktop\Kinect-PhotoBooth\bin\AnyCPU\Debug\Microsoft.Threading.Tasks.xml
+C:\Users\charl\Desktop\Kinect-PhotoBooth\bin\AnyCPU\Debug\Microsoft.Threading.Tasks.Extensions.xml
+C:\Users\charl\Desktop\Kinect-PhotoBooth\bin\AnyCPU\Debug\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+C:\Users\charl\Desktop\Kinect-PhotoBooth\obj\Debug\ColorBasics-WPF.csprojResolveAssemblyReference.cache
