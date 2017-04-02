@@ -171,7 +171,7 @@ namespace Microsoft.Samples.Kinect.ColorBasics
         /// </summary>
         public MainWindow()
         {
-
+            //Clarifai.generateHashTags();
             // get the kinectSensor object
             this.kinectSensor = KinectSensor.GetDefault();
             FrameDescription frameDescription = this.kinectSensor.ColorFrameSource.FrameDescription;
